@@ -1,9 +1,11 @@
 package com.itla.prueba_db;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,17 +22,22 @@ public class MainActivity extends AppCompatActivity {
     EstudianteRepositorio estudianteRepositorio;
     Toast msj;
 
-//    private void Limpiar(List<EditText> text){
-//        for ( EditText ed  text) {
-//            ed.
-//        }
-//    }
+    public void Limpiar(ConstraintLayout layout){
+        for (int i=0; i < layout.getChildCount(); i++){
+            View v = layout.getChildAt(i);
+            if (v instanceof EditText){
+                ((EditText) v).setText("");
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         estudianteRepositorio = new EstudianteRepositorioDbImpl(this.getBaseContext());
 
@@ -40,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnGuardar = (Button)findViewById(R.id.btnGuardar);
         Button btnMostrar = (Button)findViewById(R.id.btnMostrar);
 
+        /* -- METODO DE GUARDAR -- */
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 est.setMatricula(edEstudiante.getText().toString());
 
                 estudianteRepositorio.crear(est);
+                Limpiar((ConstraintLayout) findViewById(R.id.constraint));
             }
         });
 
+        // MOSTRAR LISTA DE ESTUDIANTES
         btnMostrar.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -60,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Imprimir todos los estudiantes registrados
+        List<Estudiante> estudianteList = estudianteRepositorio.buscar();
+        for(Estudiante e: estudianteList){
+            Log.i("Estudiante", e.getNombre());
+        }
+        Log.i("Estudiante","Done!");
 
     }
 }
