@@ -29,4 +29,9 @@ public class Estudiante {
     public void setMatricula(String matricula) {
         this.matricula = matricula;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
