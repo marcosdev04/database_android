@@ -6,11 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".MostrarEstudiante">
 
-    <ListView
-        android:id="@+id/listEstudiante"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewEstudiantes"
+        android:layout_width="397dp"
+        android:layout_height="539dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="121dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
