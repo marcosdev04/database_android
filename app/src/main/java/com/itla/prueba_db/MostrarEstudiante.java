@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
@@ -37,24 +38,20 @@ public class MostrarEstudiante extends AppCompatActivity {
 
         estudianteRepositorio = new EstudianteRepositorioDbImpl(getBaseContext());
 
-        List<Estudiante> listaEstudiantes;
-        RecyclerView recyclerViewEstudiante;
+        // obtener lista de estudiante desde el repositorio
+        List<Estudiante> listaEstudiantes = estudianteRepositorio.buscar();
 
-        recyclerViewEstudiante = (RecyclerView) findViewById(R.id.recyclerViewEstudiantes);
-        recyclerViewEstudiante.setLayoutManager(new LinearLayoutManager(this));
-
-        listaEstudiantes = (ArrayList<Estudiante>) estudianteRepositorio.buscar();
-
-        Estudiante estudiante = null;
-        Cursor cursor = (Cursor) listaEstudiantes;
-        while (cursor.moveToNext()){
-            estudiante = new Estudiante();
-            estudiante.setId(cursor.getInt(0));
-            estudiante.setNombre(cursor.getString(1));
-            estudiante.setMatricula(cursor.getString(2));
-            listaEstudiantes.add(estudiante);
+        // mostrar lista de estudiantes por consola
+        for(Estudiante e : listaEstudiantes){
+            Log.i("MostrarEstudiante", e.getNombre());
         }
 
+        // configurar recyclerview con manejador de diseño linear
+        RecyclerView recyclerViewEstudiante = findViewById(R.id.recyclerViewEstudiantes);
+        recyclerViewEstudiante.setLayoutManager(new LinearLayoutManager(this));
+
+        // adaptar la lista de estudiantes a recyclerview utilizando la clase
+        // AdaptadorEstudiante
         AdaptadorEstudiante adapter = new AdaptadorEstudiante(listaEstudiantes);
         recyclerViewEstudiante.setAdapter(adapter);
     }
