@@ -38,16 +38,20 @@ public class MostrarEstudiante extends AppCompatActivity {
 
         estudianteRepositorio = new EstudianteRepositorioDbImpl(getBaseContext());
 
+        // obtener lista de estudiante desde el repositorio
         List<Estudiante> listaEstudiantes = estudianteRepositorio.buscar();
 
+        // mostrar lista de estudiantes por consola
         for(Estudiante e : listaEstudiantes){
-            Log.i("MostrarEstudiante" , e.getMatricula());
+            Log.i("MostrarEstudiante", e.getNombre());
         }
 
-        RecyclerView recyclerViewEstudiante = (RecyclerView) findViewById(R.id.recyclerViewEstudiantes);
+        // configurar recyclerview con manejador de diseño linear
+        RecyclerView recyclerViewEstudiante = findViewById(R.id.recyclerViewEstudiantes);
         recyclerViewEstudiante.setLayoutManager(new LinearLayoutManager(this));
 
-
+        // adaptar la lista de estudiantes a recyclerview utilizando la clase
+        // AdaptadorEstudiante
         AdaptadorEstudiante adapter = new AdaptadorEstudiante(listaEstudiantes);
         recyclerViewEstudiante.setAdapter(adapter);
     }
