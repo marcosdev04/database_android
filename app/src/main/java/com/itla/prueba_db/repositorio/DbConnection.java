@@ -18,7 +18,18 @@ public class DbConnection extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE \"estudiante\" (\"id\" INTEGER PRIMARY KEY AUTOINCREMENT, \"nombre\" TEXT NOT NULL,\t\"matricula\" TEXT NOT NULL)");
+        // TABLA DE ESTUDIANTE
+        db.execSQL("CREATE TABLE \"estudiante\" (\n" +"\t\"id\"\tINTEGER PRIMARY KEY AUTOINCREMENT,\n" + "\t\"nombre\"\tTEXT NOT NULL,\n" +
+                "\t\"matricula\"\tTEXT NOT NULL,\n" + "\t\"idcarrera\"\tINTEGER NOT NULL,\n" + "\tFOREIGN KEY(\"idcarrera\") REFERENCES \"carrera\"(\"idcarrera\")\n" +
+                ");");
+        // TABLA DE CARRERA
+        db.execSQL("CREATE TABLE \"carrera\" (\n" + "\t\"idcarrera\"\tINTEGER PRIMARY KEY AUTOINCREMENT,\n" + "\t\"nombre\"\tTEXT NOT NULL\n" + ");");
+        // TABLA DE MATERIA
+        db.execSQL("CREATE TABLE \"materia\" (\n" + "\t\"idmateria\"\tINTEGER PRIMARY KEY AUTOINCREMENT,\n" + "\t\"nombre\"\tTEXT NOT NULL,\n" + "\t\"creditos\"\tINTEGER NOT NULL\n" + ");");
+        // TABLA CARREAR_MATERIA
+        db.execSQL("CREATE TABLE \"carrera_materia\" (\n" + "\t\"idcarrera\"\tINTEGER NOT NULL,\n" + "\t\"idmateria\"\tINTEGER NOT NULL,\n" + "\tFOREIGN KEY(\"idmateria\") REFERENCES \"materia\"(\"idmateria\"),\n" +
+                "\tFOREIGN KEY(\"idcarrera\") REFERENCES \"carrera\"(\"idcarrera\")\n" +
+                ");");
     }
 
     @Override
