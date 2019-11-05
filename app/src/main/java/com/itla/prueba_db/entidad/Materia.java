@@ -6,7 +6,11 @@ public class Materia {
     private String nombre;
     private Integer creditos;
 
-
+    public Materia(Integer id, String nombre, Integer creditos) {
+        this.id = id;
+        this.nombre = nombre;
+        this.creditos = creditos;
+    }
 
     public Integer getId() {
         return id;
@@ -30,5 +34,10 @@ public class Materia {
 
     public void setCreditos(Integer creditos) {
         this.creditos = creditos;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
     }
 }

@@ -27,6 +27,7 @@ public class EstudianteRepositorioDbImpl implements EstudianteRepositorio{
 
         cv.put("nombre", estudiante.getNombre());
         cv.put("matricula", estudiante.getMatricula());
+        cv.put("idcarrera", estudiante.getIdcarrera());
 
         SQLiteDatabase db =  dbConnection.getWritableDatabase();
         long id = db.insert(TABLE,null,cv);
@@ -59,20 +60,22 @@ public class EstudianteRepositorioDbImpl implements EstudianteRepositorio{
         List<Estudiante> estudiantes = new ArrayList<>();
 
         SQLiteDatabase db = dbConnection.getReadableDatabase();
-        Cursor c = db.query(TABLE,new String[]{"id","nombre","matricula"},null,null,null,null, null);
+        Cursor c = db.rawQuery("SELECT e.matricula as matricula, e.nombre as nombre, c.nombre as nombrecarrera\n" +
+                "FROM estudiante e INNER JOIN carrera c\n" +
+                "ON e.idcarrera = c.idcarrera",null);
 
         Estudiante est;
 
         while (c.moveToNext()){
             // c.getColumnIndex("id") para obtener el indice del campo
-            int id = c.getInt(c.getColumnIndex("id"));
-            String nombre = c.getString(c.getColumnIndex("nombre"));
             String matricula = c.getString(c.getColumnIndex("matricula"));
+            String nombre = c.getString(c.getColumnIndex("nombre"));
+            String nombrecarrera = c.getString(c.getColumnIndex("nombrecarrera"));
 
             est = new Estudiante();
-            est.setId(id);
-            est.setNombre(nombre);
             est.setMatricula(matricula);
+            est.setNombre(nombre);
+            est.setNombreCarrera(nombrecarrera);
             estudiantes.add(est);
         }
         c.close();

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.itla.prueba_db.entidad.Estudiante;
 import com.itla.prueba_db.repositorio.EstudianteRepositorio;
 import com.itla.prueba_db.repositorio.EstudianteRepositorioDbImpl;
-
 import org.w3c.dom.Text;
 
 import java.util.List;
@@ -29,7 +28,6 @@ public class AdaptadorEstudiante extends RecyclerView.Adapter<AdaptadorEstudiant
 
     public void setListaDeEstudiante(List<Estudiante> listaEstudiante) {
         this.listaEstudiante = listaEstudiante;
-
     }
 
     @Override
@@ -41,9 +39,9 @@ public class AdaptadorEstudiante extends RecyclerView.Adapter<AdaptadorEstudiant
 
     @Override
     public void onBindViewHolder(@NonNull AdaptadorEstudiante.MyViewHolder myViewHolder, int position) {
-        myViewHolder.idEst.setText((listaEstudiante.get(position).getId().toString()));
+        myViewHolder.txtMatricula.setText((listaEstudiante.get(position).getMatricula().toString())   );
         myViewHolder.nombreEst.setText((listaEstudiante.get(position).getNombre().toString()));
-        myViewHolder.matriculaEst.setText((listaEstudiante.get(position).getMatricula().toString()));
+        myViewHolder.carrera.setText((listaEstudiante.get(position).getNombreCarrera().toString()));
     }
 
     @Override
@@ -51,17 +49,17 @@ public class AdaptadorEstudiante extends RecyclerView.Adapter<AdaptadorEstudiant
         return listaEstudiante.size();
     }
 
-
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView idEst,nombreEst,matriculaEst;
+        TextView txtMatricula,nombreEst,carrera;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            idEst = (TextView) itemView.findViewById(R.id.txtId);
+
+            txtMatricula = (TextView) itemView.findViewById(R.id.Matricula);
             nombreEst = (TextView) itemView.findViewById(R.id.txtNombre);
-            matriculaEst = (TextView) itemView.findViewById(R.id.txtMatricula);
+            carrera = (TextView) itemView.findViewById(R.id.txtCarrera2);
+
         }
 
     }

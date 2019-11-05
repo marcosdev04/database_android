@@ -6,6 +6,15 @@ public class Estudiante {
     private String nombre;
     private String matricula;
     private Integer idcarrera;
+    private String nombreCarrera;
+
+    public String getNombreCarrera() {
+        return nombreCarrera;
+    }
+
+    public void setNombreCarrera(String nombreCarrera) {
+        this.nombreCarrera = nombreCarrera;
+    }
 
     public Integer getIdcarrera() {
         return idcarrera;

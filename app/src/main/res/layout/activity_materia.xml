@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.036" />
 
     <Button
-        android:id="@+id/btnCancelar"
+        android:id="@+id/btnCancelarMateria"
         android:layout_width="154dp"
         android:layout_height="59dp"
         android:text="Cancelar"

@@ -54,64 +54,25 @@ public class MateriaRepositorioDbImpl implements MateriaRepositorio {
         return null;
     }
 
-//    @Override
-//    public List<String> listaMaterias() {
-//        List<String> materias = new ArrayList<>();
-//
-//        SQLiteDatabase db = dbConnection.getReadableDatabase();
-//
-//        Cursor cursor = db.rawQuery("SELECT nombre FROM materia",null);
-//
-////        Materia mate;
-//        while (cursor.moveToNext()){
-////            Integer id = cursor.getInt(cursor.getColumnIndex("id"));
-////            String nombre = cursor.getString(cursor.getColumnIndex("nombre"));
-//            materias.add(cursor.getString(0));
-////            materias.add(cursor.getString(1));
-//        }
-//
-//        cursor.close();
-//        db.close();
-//        return materias;
-//    }
-
-//    public List<String> getMaterias() {
-//        List<String> materia = new ArrayList<>();
-//        //get readable database
-//        SQLiteDatabase db = dbConnection.getReadableDatabase();
-//
-//        Cursor cursor = db.rawQuery("SELECT nombre FROM materia", null);
-//
-//        if (cursor.moveToFirst()) {
-//            do {
-//                materia.add(cursor.getString(0));
-//            } while (cursor.moveToNext());
-//        }
-//        //close the cursor
-//        cursor.close();
-//        //close the database
-//        db.close();
-//        return materia;
-//    }
-
-
     public List<Materia> listaMaterias(){
+
         List<Materia> materias = new ArrayList<>();
 
         SQLiteDatabase db = dbConnection.getReadableDatabase();
-        Cursor c = db.query(TABLE,new String[]{"id","nombre","creditos"},null,null,null,null, null);
+
+        Cursor c = db.query(TABLE, null,null,null,null,null, null);
 
         while (c.moveToNext()){
-            Materia mat = new Materia();
+            Materia mat = new Materia(0,"",0);
 
-            mat = new Materia();
-            mat.setId(c.getInt(c.getColumnIndex("id")));
+            mat = new Materia(0,"",0);
+            mat.setId(c.getInt(c.getColumnIndex("idmateria")));
             mat.setNombre(c.getString(c.getColumnIndex("nombre")));
             mat.setCreditos(c.getInt(c.getColumnIndex("creditos")));
             materias.add(mat);
         }
         c.close();
-
+        db.close();
         return materias;
     }
 }

@@ -5,6 +5,29 @@ public class Carrera {
     private String nombre;
     private Integer cantidad_materia;
     private Integer creditos;
+    private Integer idcarrera;
+    private Integer idmateria;
+
+    public Carrera(int id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    public Integer getIdcarrera() {
+        return idcarrera;
+    }
+
+    public void setIdcarrera(Integer idcarrera) {
+        this.idcarrera = idcarrera;
+    }
+
+    public Integer getIdmateria() {
+        return idmateria;
+    }
+
+    public void setIdmateria(Integer idmateria) {
+        this.idmateria = idmateria;
+    }
 
     public Integer getCantidad_materia() {
         return cantidad_materia;
@@ -36,5 +59,10 @@ public class Carrera {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    @Override
+    public String toString() {
+        return  nombre;
     }
 }

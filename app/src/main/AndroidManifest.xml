@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CarreraActivity"></activity>
+        <activity android:name=".ItemCarrera"></activity>
+        <activity android:name=".ItemMateria" />
+        <activity android:name=".CarreraActivity" />
         <activity android:name=".MateriaActivity" />
         <activity android:name=".ItemActivity" />
-        <activity android:name=".MostrarEstudiante" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".CrearCarrera" />
         <activity android:name=".EstsudianteActivity" />
-        <activity android:name=".CrearCarrera">
-
+        <activity android:name=".MostrarEstudiante">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -30,6 +30,7 @@ import java.util.List;
 public class MostrarEstudiante extends AppCompatActivity {
 
     EstudianteRepositorio estudianteRepositorio;
+    Button btnNewEstudiante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +38,38 @@ public class MostrarEstudiante extends AppCompatActivity {
         setContentView(R.layout.mostrar_estudiante);
 
         estudianteRepositorio = new EstudianteRepositorioDbImpl(getBaseContext());
+        btnNewEstudiante = (Button) findViewById(R.id.btnNuevoEstudiante);
 
         List<Estudiante> listaEstudiantes = estudianteRepositorio.buscar();
 
-        for(Estudiante e : listaEstudiantes){
-            Log.i("MostrarEstudiante" , e.getMatricula());
-        }
+//        for(Estudiante e : listaEstudiantes){
+//            Log.i("MostrarEstudiante" , e.getMatricula());
+//        }
+
+        btnNewEstudiante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newEstudiante = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(newEstudiante,0);
+            }
+        });
 
         RecyclerView recyclerViewEstudiante = (RecyclerView) findViewById(R.id.recyclerViewEstudiantes);
         recyclerViewEstudiante.setLayoutManager(new LinearLayoutManager(this));
 
+        AdaptadorEstudiante adapter = new AdaptadorEstudiante(listaEstudiantes);
+        recyclerViewEstudiante.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        estudianteRepositorio = new EstudianteRepositorioDbImpl(getBaseContext());
+        List<Estudiante> listaEstudiantes = estudianteRepositorio.buscar();
+
+        RecyclerView recyclerViewEstudiante = (RecyclerView) findViewById(R.id.recyclerViewEstudiantes);
+        recyclerViewEstudiante.setLayoutManager(new LinearLayoutManager(this));
 
         AdaptadorEstudiante adapter = new AdaptadorEstudiante(listaEstudiantes);
         recyclerViewEstudiante.setAdapter(adapter);
